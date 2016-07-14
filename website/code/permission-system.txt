@@ -1,0 +1,133 @@
+Das Uni-Ordner Rechtesystem (Januar/Februar 2012)
+=================================================
+
+Im Uni-Ordner sind viele verschiedene Dinge online gestellt, die aus vielen
+Quellen kommen und zum Teil nicht ohne Passwortschutz oeffentlich verfuegbar
+sein sollten. Andererseits gibt es viele selbstgemachte Inhalte, die ich ohne
+Passwort veroeffentlichen will. Um die Inhalte im Kontext der Veranstaltungen
+und Semester zu lassen, benoetigt das neue System ein datei(pfad)basiertes
+Rechtemodell.
+
+== Technische Vorueberlegungen ==
+Dateibasierte Zugriffsrechte gibt es auf Dateisystemlevel (Unix-Dateirechte, ACLs)
+oder mit High-Level-Filemanagament-Webprogrammen. Zugriffskontrolle auf
+Webserverniveau (Apache mod_auth*) gab es bislang nicht dateibasiert. Mein
+im Februar 2012 selbstgeschriebes mod_perl2-Modul fuer Apache schafft abhilfe.
+
+Die Entscheidung für diese Technik (statt etwa Dateirechte) ist, um Systemüber-
+greifend und -transparent arbeiten zu können (heterogene Systeme) und besser
+archivieren/synchronisieren zu koennen (Dateirechte sind schnell verstellt).
+
+== Konfigurationsformat ==
+Dieses Rechtesystem sieht eine verzeichnisweite Datei "permissions.txt" vor. Ihr
+Format ist zeilenweise:
+
+Datei: Zugriffslevel
+
+Der zu verwendende Zeichensatz ist UTF-8 (bzw. wie das Dateisystem). Leere
+Zeilen werden ignoriert, Zeilen mit Raute # in der ersten Spalte sind
+Kommentare. Ordner und Dateien werden gleichermassen behandelt (keine
+Slashes fuer Ordner verwenden). Permission-Files koennen nur auf der
+Ordnerebene agieren, in der sie stehen, fuer einzelne Permissions in
+Unterordnern muessen im Zweifelsfall eigene Permission-Files geschrieben
+werden.
+
+
+== Zugriffslevel ==
+Sichtbarkeit bezeichnet die Art der Darstellung im automatisierten
+Directory-Listing. Zugriff bedeutet, ob man die Datei betrachten=runterladen
+kann.
+
+Das Nichterwaehnungsrecht (empty/undefined) gilt, wenn eine Datei im
+Ordner in der zugehoerigen permission-File keine Erwaehnung findet (Details
+unten). Das Standard-Abkuerzungsrecht (default, siehe unten) lautet public.
+
+* private. Datei/Ordner ist gar nicht sichtbar, der Webserver erstattet
+  in keinem Fall Zugriff. HTTP-Code 403 Forbidden.
+  
+* protected. Datei ist nur fuer eingeloggte Benutzer sichtbar, aber
+  nicht lesbar (bislang nicht implementiert, gleichgeschaltet mit private).
+  
+* password. Datei ist fuer alle sichtbar, aber nur eingeloggte Benutzer
+  koennen darauf zugreifen. Erfordert HTTP-Authentifikation.
+  Das gleiche gilt fuer Ordner - Alle Ordnerinhalte sowie das Ordnerlisting
+  koennen, wenn keine darin enthaltene Permission-File anderes bewirkt, nur
+  als registrierter Benutzer eingesehen werden.
+
+* public. Datei ist fuer alle sichtbar und kann von allen gelesen werden.
+  Ein public-Ordner ist sichtbar, aber alle Inhalte darin entsprechen dem
+  Recht der Nichterwaehnung, solange keine Permission-File im Ordner
+  gegenteiliges bewirkt.
+
+* open. Wirkt auf Dateien wie public. Open Ordner werden rekursiv auf public
+  geschaltet, d.h. keine weitere Permission-File in einem tiefer gelegenen
+  Ordner ist noetig, um die Inhalte freizuschalten. Das Eingrenzen von
+  Rechten in Unterordnern ist ausgeschlossen, das Permission-System ist quasi
+  ausgeschaltet.
+
+
+== Kapitalfehler-Pradigma ==
+Jede nicht erwaehnte Datei bekommt automatisch das schaerfste Level, private.
+Dadurch ist gewaehrleistet, dass nicht bei Dateiumbenennung Kapitalfehler
+entstehen und Dateien unbeabsichtigt sichtbar werden. Dateien muessen also
+exiplit freigeschaltet werden statt exiplit versteckt. Eine Ausnahme bildet
+das open-Recht.
+
+Eine weitere Ausnahme ist der Root-Ordner. Solange beim Herabsteigen in die
+Ordnerstruktur noch keine Permission-File gesichtet wurde, ist alles public.
+Das Erscheinen der ersten Permission-File aktiviert das System, deswegen
+sorgt eine public-Freigabe mit Absicht eben nicht fuer eine dauerhaft-
+rekursive Anwendung (eben das tut open), sondern faehrt die Kapitalfehler-
+Regelung, dass Inhalte wenn nicht in einer Permission-File erwaehnt, nicht
+online zugaenglich sind.
+
+Im Uni-Ordner werden Permission-Files typischerweise erst auf Vorlesungs-
+niveau verwendet (Struktur /Root/Semesterangabe/Vorlesung/Materialtyp).
+
+== Abkuerzungen ==
+Das Standardzeilenformat lautet:
+
+Dateiname: Zugriffsrecht
+
+Als Kurzformat kann auch nur der Dateiname (ohne Doppelpunkt) geschrieben
+werden, dann wird das default-Zugriffslevel zugewiesen (siehe oben):
+
+Dateiname
+
+Um lange, sich ggf im Laufe der Zeit stueckweise aendernde Dateinamen
+nicht ausschreiben zu muessen oder bestimmte Dateitypen anhand ihrer
+Endung zu erkennen, eignen sich Wildcards. Text::Glob matcht dabei
+die Wildcardzeichen *, ? etc. auf das Verzeichnislisting bzw. die
+angefragte Datei. (Auch hier wird natuerlich nicht bis in Unterordner
+gematcht sondern nur auf Ordnerebene).
+
+Die Reihenfolge von Eintraegen ist sehr wichtig: Permission-Files muessen
+von oben nach unten vom Speziellen ins Allgemeine gehen. Dementsprechend
+entspricht in einem Verzeichnis mit den Dateien a, abc, ABC, foo 
+eine Permission-File mit Wildcards (links) effektiv:
+
+a: public              a: public
+A*: private            abc: private sowie ABC: private
+*: password            foo: password
+foo: open              matcht nicht, da foo schon versorgt ist.
+
+
+== Zur Technik ==
+Auf Silvester (M66-Heimserver) lief bis Februar noch lighttpd als Webserver,
+daher erwaegte ich zunaechst eine Lua-Implementierung mit mod_magnet. Ich
+konnte mich aber nie dazu hinreissen, es umzusetzen, sodass ich am 20.01.2012
+dann mit einer Quick & Dirty-PHP-Implementierung anfing, die auf jedem Web-
+server mittels mod_rewrite/etc. funktioniert haette. Zuletzt hab ich aber
+im Februar Silvester neu aufgesetzt, diesmal mit Apache, sodass sich eine
+mod_perl-Implementierung in meiner Lieblingssprache anbot :-)
+Der Vorteil dieser Perl-Implementierung ist, dass sie auf Webserver-
+Konfigurationslevel arbeitet und man dadurch alle Webserver-Features
+(Mime-Type-Auslieferung, Filter, Handler, URL-FS-Abbildung, WebDAV, Logging,
+Subrequests, Ausgabe-Performance, saubere Config, usw.) in Anspruch nehmen
+kann. Die Loesung bietet einen performanten Eigenbau-Ersatz fuer mod_autoindex,
+der mittels Permission-File-Parsing schnell und durch das TemplateToolkit
+huebsch aufgearbeitete Websites dynamisch praesentiert.
+Das Permission-System laeuft auf jedem Apachen, den man auf Server Config-
+Kontext konfigurieren kann.
+
+-- Sven (Doku 25.04.2012)

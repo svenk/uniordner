@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<title>$path - Uni-Ordner</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/uni/code/skins/classic/dirlisting.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="/uni/code/skins/classic/dirlisting.js"></script>
+</head>
+<body class="[% logged_in ? 'logged-in' : 'logged-out' %]">
+
+[% path_chunks = path.split('/') %]
+<h2>Index of [% FOREACH chunk IN path_chunks.slice(1) -%]
+/<a href="/[% path_chunks.slice(1, loop.count).join('/') %]">$chunk</a>
+[%- END %]</h2>
+
+[% IF readme_file %]
+<h3 id="readme" class="hidden">Readme file</h3>
+<pre class="readme">[% print_readme('plain', readme_file) %]</pre>
+[% END %]
+
+<div id="topnav">
+<a href="/uni">Uni-Ordner</a> | <a href="http://sven.köppel.org$path">Mirror</a>
+</div>
+
+[% IF counter.nonviewable %]
+<div id="login-sidebar">
+<h3>Einloggen</h3>
+
+<p>In diesem Ordner sind Dateien gespeichert, die nur für
+beschränkte Lerngruppen zugänglich sind.</p>
+
+<a href="?force-login">Lerngruppe aktivieren</a>
+<!--
+<form class="http-auth" method="post" action="?force-login">
+Benutzer: <input type="text" class="text user" placeholder="Benutzer">
+<br>Passwort: <input type="password" class="text pwd" placeholder="Passwort">
+<br><input type="submit" class="button" value="Einloggen">
+</form>
+-->
+
+</div>
+[% END %]
+
+<div class="list">
+<table summary="Directory Listing" cellspacing="0" cellpadding="0">
+<thead><tr><th class="n">Name</th><th class="m">Last Modified</th><th class="s">Size</th><th class="t">Type</th><th class="p">Permission</th><th class="a">Access</th></tr></thead>
+<tbody>
+[%#  IF !is_top  <--- wenn man das parent directory nicht nach /uni haben will, will ich aber! %]
+<tr>
+	<td class="n"><a href="../">Parent Directory</a>/</td><td class="m">&nbsp;</td><td class="s">-&nbsp;</td><td class="t">Directory</td>
+</tr>
+[% USE date %]
+[% FOREACH f IN files %]
+<tr class="perm-$f.permission canview-[% f.can_view ? 'yes' : 'no' %]">
+	<td class="n"><a href="$f.href" title="[% f.can_view ?
+		"" : "Anklicken zum Einloggen und Öffnen"
+		%]">$f.name</a>[% IF f.is_dir %]/[% END %]</td>
+	<td class="m">[% date.format(f.lastmod, '%Y-%b-%d %H:%M:%S') %] </td>
+	<td class="s">[% IF f.is_dir %]-&nbsp;[% ELSE %]$f.size[% END %]</td>
+	<td class="t">$f.type</td>
+	<td class="p">$f.permission
+	<td class="a">[% f.can_view ? 'can view' : 'cannot view' %]
+</tr>
+[% END %]
+</tbody></table>
+</div>
+
+<div class="foot">powered by UniOrdner <acronym title="Next Generation">NG</acronym> by <a href="/">svenk</a> (<a href="/">Kontakt</a>)
+Design: <a href="?view=mobile" title="View in Mobile view">Mobile</a> <a href="?view=modern">Standard</a>.
+</div>
+
+<div id="statistics" class="hidden">
+<h3>File Statistics</h3>
+<dl>[% FOREACH c IN counter.pairs %]<dt>$c.key<dd>$c.value[% END %]</dl>
+<h3>Folder Statistics</h3>
+<dl>[% FOREACH c IN dirinfo.pairs %]<dt>$c.key<dd>$c.value[% END %]</dl>
+<h3>Path Calculations</h3>
+<dl>[% FOREACH c IN paths.pairs %]<dt>$c.key<dd>$c.value[% END %]</dl>
+</div>
+</body>
+</html>

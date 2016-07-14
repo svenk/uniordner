@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+	<title>$path - Uni-Ordner (Skripte, Übungen und Lösungen)</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- jquery mobile -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	
+	<style type="text/css">
+		.hidden { display: none; }
+		h4 { text-overflow: ellipsis '.'; }
+		header h4 a:link, header h4 a:visited { color: #D9ECFA !important; }
+		li.canview-no { opacity: .5; }
+		#header h4 em { opacity: .7; font-style: normal; font-weight: bold; padding: 0 0.2em;  }
+		#header h4 a { opacity: .8; color: #FFFFFF; font-weight: bold; text-shadow: 0 1px 1px #111111; text-decoration: none; }
+	</style>
+</head>
+<body class="[% logged_in ? 'logged-in' : 'logged-out' %]">
+
+<div data-role="page">
+
+<div data-role="header" data-position="fixed" id="header">
+	[% path_chunks = path.split('/') %]
+	<h4>[% FOREACH chunk IN path_chunks.slice(1) -%]
+	<em>/</em><a href="/[% path_chunks.slice(1, loop.count).join('/') %]/" [% IF loop.first() %]rel="external"[% ELSE %]data-transition="slidedown"[% END %]>$chunk</a>
+	[%- END %]</h4>
+	
+	[% IF !is_top %]
+	<a href="../" data-transition="" data-icon="arrow-u" data-direction="reverse">Up</a>
+	[% END %]
+	<a href="/uni" rel="external" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right">Uni-Ordner</a> 
+</div>
+
+<div data-role="content">
+[% IF readme_file %]
+<h3 id="readme" class="hidden">Readme file</h3>
+<pre class="readme">
+[% INSERT $readme_file %]
+</pre>
+[% END %]
+
+[% IF counter.nonviewable %]
+<div class="login-sidebar ui-bar ui-bar-b">
+<h4>Einloggen</h4>
+
+<p style="font-size:80%;">In diesem Ordner sind Dateien gespeichert, die nur für
+beschränkte Lerngruppen zugänglich sind.</p>
+
+<a href="?force-login" data-role="button">Lerngruppe aktivieren</a>
+</div><p>&nbsp;<!--some vspace--></p>
+[% END %]
+
+<ul class="list" data-role="listview" data-split-icon="gear" data-split-theme="d">
+[% FOREACH f IN files %]
+<li [% IF not f.is_dir %]data-icon="false"[%END%] class="perm-$f.permission canview-[% f.can_view ? 'yes' : 'no' %]">
+	<a [% IF not f.is_dir %]rel="external"[%ELSE%]data-transition="slide"[%END%] href="$f.href" title="[% f.can_view ?
+		"" : "Anklicken zum Einloggen und Öffnen"
+		%]">$f.name
+		[% IF not f.can_view %]<span class="ui-li-count" title="Password needed">pwd</span>[% END %]
+	</a>
+	[%# <a href="#fdetails-$loop.count" data-transition="flip">Details</a> %]
+</li>
+[% END %]
+</ul>
+</div>
+
+<!-- role=footer hat keinen Platz fuer buttons -->
+<div data-role="header" data-theme="d"> 
+  <a rel="external" href="?view=modern" data-role="button" data-icon="gear">Desktop</a>
+  <h4>powered by UniOrdner <acronym title="Next Generation">NG</acronym> by <a href="/">svenk</a>.</h4>
+</div>
+</div><!-- end of main page -->
+
+[%#
+<!-- nochmal durch alle Dateien gehen -->
+
+Dateidetails gehen eigentlich schon, aber mit unique
+ids nicht und es ist auch viel traffic - ineffizient auf
+diesem weg.
+
+-%FOREACH f IN files %-
+<div data-role="dialog" class="file-details" id="fdetails-$loop.count">
+	<div data-role="header" data-theme="d">
+		<h4>$f.name</h4>
+	</div>
+	<div data-role="content" data-theme="c">
+	<dl>
+	<dt>Type 	<dd>$f.type
+	<dt>Lastmod	<dd>$f.lastmod
+	-% IF not f.is_dir %-<dt>Size <dd>$f.size-%END%-
+	<dt>Permission <dd>$f.permission
+	<dt>Can view?  <dd>-% f.can_view ? 'can view' : 'cannot view' %-
+	</dl>
+	
+	<a href="#" data-role="button" data-rel="back" data-theme="c">Close</a>
+	</div>
+</div>
+-% END %-
+%]
+
+</body>
+</html>

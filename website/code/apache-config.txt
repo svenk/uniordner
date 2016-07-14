@@ -1,0 +1,37 @@
+
+Apache2 Configuration for using UniOrdner permission system with mod-perl2
+==========================================================================
+
+On Server/VHost level, assuming that the code was installed in
+/srv/www/uni/code (so /srv/www/uni/code/UniOrdner/ contains the pm files):
+
+---- BEGIN CONFIG ---
+	PerlSwitches -I/srv/www/uni/code
+
+	PerlModule Apache2::Reload
+	PerlInitHandler Apache2::Reload
+	PerlSetVar ReloadAll Off
+	PerlSetVar RealoadMOdules "UniOrdner::*"
+
+	<Directory /srv/www/uni>
+		Options -Indexes
+		# DISABLED mod_autoindex!
+
+		PerlAccessHandler UniOrdner::UserAccess
+
+		AuthType Basic
+		AuthName "Uni-Ordner"
+	#       Require valid-user
+		AuthUserFile /etc/apache2/passwords/uni.passwd
+
+		SetHandler perl-script
+		PerlResponseHandler UniOrdner::AutoIndex
+		PerlAddVar uniroot /srv/www/uni
+
+		ErrorDocument 404 /uni/design/error-404.html
+		ErrorDocument 403 /uni/design/error-403.html
+		ErrorDocument 401 /uni/design/error-401.html
+	</Directory>
+---- END CONFIG ---
+
+This configuration is working on silvester.

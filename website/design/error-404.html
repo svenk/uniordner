@@ -1,0 +1,92 @@
+<html>
+<head>
+  <title>The Uni Ordner (SvenK) - Page not found (404)</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript">$(function(){ $(".mirrorinfo").load('/uni/mirror.txt'); });</script>
+  <!-- selbst IE 8 (!) macht nur Muell mit dem Design -->
+  <!--[if !IE]><!--><link rel="stylesheet" href="/uni/design/uni-start.css" type="text/css">
+  <script type="text/javascript" src="/uni/design/jquery.idTabs.min.js"></script><!--<![endif]-->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <meta name="date" content="29.11.2010">
+  <meta name="author" content="Sven Koeppel">
+  <script type="text/javascript">
+	$(function(){
+		$(".js-only").show();
+		var path = location.pathname;
+		var partial_path = "";
+		$.each(path.split(/\//), function(x) {
+			if(/^\s*$/.test(this)) return;
+			partial_path += "/" + this;
+			var tr = $("<tr>").html("<td class='path'><a href='"+partial_path+"'>"+partial_path+"</a><td class='checking'>überprüfe...").appendTo("#upwards");
+			$.ajax({
+				url: partial_path,
+				context: tr,
+				complete: function(xhr, status) {
+					var texts = { success: "gibts", notmodified: "gibts",
+						error: "nicht da!", timeout: "Timeout (zu lahm)", parsererror: "Parserfehler!"};
+					var td = $(this).find("td.checking").addClass(status).removeClass("checking")
+						.text(texts[status] || "Unknown state!");
+					if(last=xhr.getResponseHeader("Last-Modified"))
+						td.attr("title", "Letzte Änderung: "+last);
+				}
+			});
+		});
+	});
+  </script>
+  <style type="text/css">
+		#upwards { float: right; margin: 0 0 1em 1em; }
+		.js-only { display: none; }
+		td.path { font-family: monospace; text-align: left; }
+		td.checking { color: #888; }
+		td.success { background-color: #afa; }
+		td.timeout, td.parsererror { background-color: #ffa; }
+		td.error { background-color: #faa; }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+
+<img src="/uni/design/folders.jpg" id="folders">
+<div id="content">
+
+<h1 title="Im Uni-Ordner werden alle Studiendateien gesammelt.">Uni-Ordner</h1>
+
+<h2>Datei nicht gefunden (404)</h2>
+
+<table id="upwards" class="js-only">
+<tr><th>Ordner</th><th>Gibts den noch?</th></tr>
+</table>
+
+<p>Dein Link in meinen Uni-Ordner ist leider etwas älter und ich habe meine
+Dateien zwischenzeitlich umbenannt. Das ist aber nicht schlimm! Mit großer
+Wahrscheinlichkeit gibt es die/den gesuchte(n) Datei/Ordner noch!</p>
+
+<noscript>Dazu entferne einfach sukzessive die Ordnernamen aus dem Pfad und
+orientiere dich dann von dort neu. Also etwa:
+<pre>/uni
+/uni/bla              <- gibts! hier die Suche nach "bla/bli/blo.xyz" starten.
+/uni/bla/bli          <- gibts nicht
+/uni/bla/bli/blo.xyz  <- gibts nicht
+</pre>
+Wenn du auf einen modernen Browser umsteigst, wird dir diese Übersicht
+als Special Service automatisch generiert ;-)
+</noscript>
+
+<p class="js-only">Auf der rechten Seite siehst du, welche übergeordneten
+Ordner existieren. Gehe einfach in den tiefstmöglichen Ordner, der noch
+existiert und starte von dort deine Suche. Solltest du nicht fündig werden,
+dann schreib im Notfall doch einfach <a href="/uni">mir ne Mail</a>.
+</p>
+
+
+<!--<img src="design/books-left.jpg" id="books-left">-->
+<a href="library" title="Zur den eBooks im Uni-Ordner gehen"><img src="/uni/design/books-right.jpg" id="books-right" alt="Einige Bücher vom vierten Semester - auf zur Bibliothek"></a>
+
+</div><!--content-->
+</div><!--wrapper-->
+<div id="footer">
+	<a href="http://dev.technikum29.de/svn/filedetails.php?repname=private-websites&path=%2Funi-ordner%2Findex.html" title="Im WebSVN anschauen">$Id: index.html 50 2010-10-10 17:31:46Z sven $</a>
+	<div class="mirrorinfo"></div>
+</div>
+</body>
+</html>

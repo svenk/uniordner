@@ -1,0 +1,125 @@
+[%#
+  Template fuer modernes Design, am 01.11.2013 angefangen,
+  inspiriert von jquerymobile demo bzw. Open Sans moderne Mobile
+  GUIs. Responsive, aber ohne CSS-Framework geschrieben.
+  SEO in Mind.
+  -- Sven
+%]
+[% path_chunks = path.split('/') %]
+<!doctype html>
+<html class="no-js">
+<head>
+[%# Aus "","uni","ss123","Veranstaltung" was machen wie "Veranstaltung, im ss123": %]
+	<title>[% IF path_chunks.slice(2).size > 1 -%]
+		[% FOREACH chunk IN path_chunks.slice(2).reverse -%]
+			[% IF loop.last %] im $chunk[% ELSE %]$chunk, [% END %]
+		[%- END %]
+	[% ELSE %] Das [% path_chunks.slice(2).reverse.0 %] [% END %]- Uni-Ordner (Physik und Informatik Übungen, Lösungen und Scripte)</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/uni/code/skins/modern/modern.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="/uni/code/skins/modern/modern.js"></script>
+</head>
+<body class="listing-page [% logged_in ? 'logged-in' : 'logged-out' %] [% readme_file ? 'has-readme' : 'no-readme' %]">
+
+<section class="header">
+<div class="wrapper">
+<h1><a href="/uni">Uni-Ordner</a></h1>
+<h2><span class="prefix">[% FOREACH chunk IN path_chunks.slice(1) -%]
+/[% IF loop.last %]</span><span class="dirname">[% END %]<a href="/[% path_chunks.slice(1, loop.count).join('/') %]">$chunk</a>
+[%- IF loop.last %]</span>[% END %]
+[%- END %]</h2>
+
+<!-- section.header-append per CSS hochgerueckt -->
+</div>
+</section>
+<div class="content wrapper">
+
+[% IF readme_file %]
+<div class="col right">
+<section class="readme">
+<h2 class="topline">Readme file</h2>
+[% print_readme('markdown', readme_file) %]
+</section>
+</div>
+[% END %]
+
+<div class="col right">
+<div class="header-append">
+<!--<nav id="topnav">
+	<a href="/uni">Uni-Ordner</a> | <a href="http://sven.köppel.org$path">Mirror</a>
+</nav>-->
+
+[% IF counter.nonviewable %]
+<section id="login-required">
+<h3>Einloggen</h3>
+
+<p>In diesem Ordner sind Dateien gespeichert, die nur für
+beschränkte Lerngruppen zugänglich sind.</p>
+
+<nav>
+<a href="?force-login" class="btn btn-primary">Lerngruppe aktivieren</a>
+| <a href="/uni/account.html" class="btn">Hilfe</a>
+</nav>
+</section><!-- login required -->
+[% END %]
+
+[% IF logged_in %]
+<!-- Javascript Logout Button -->
+<section id="logout" class="js-only"></section>
+[% END %]
+</div>
+</div><!-- col right -->
+
+<div class="col left">
+<section class="list">
+<table class="listing" summary="Directory Listing" cellspacing="0" cellpadding="0">
+<thead><tr><th class="n">Name</th><th class="m">Datum</th><th class="s">Größe</th></tr></thead>
+<tbody>
+<tr class="up">
+	<td class="n"><a href="../">Verzeichnis hoch</a></td><td class="m">&nbsp;</td><td class="s">-&nbsp;</td>
+</tr>
+[% USE date %][%# Date Plugin fuer Datumsformatierung %]
+[% FOREACH f IN files %]
+<tr class="perm-$f.permission canview-[% f.can_view ? 'yes' : 'no' %]" [% UNLESS f.can_view %]title="Geschützte Lernressource"[% END %]>
+	<td class="n"><a href="$f.href" title="[% f.can_view ?
+		"" : "Anklicken zum Einloggen und Öffnen"
+		%]">$f.name</a></td>
+	<td class="m" title="Letzte Änderung am [% date.format(f.lastmod, '%Y-%b-%d um %H:%M:%S') %] Uhr">[% date.format(f.lastmod, '%d.%m.%Y') %]</td>
+	[% IF f.is_dir %]<td class="s is-dir">Verzeichnis</td>[%
+	   ELSE %]<td class="s" title="Dateigröße ${f.size}Byte">$f.size</td>[% END %]
+</tr>
+[% END %]
+</tbody></table>
+</section>
+</div>
+
+<div class="col right clear-right">
+<section class="about">
+<!-- Ueber den Uni-Ordner -->
+<div class="topline" class="js-close">Schließen</div>
+<h2>Über den Uni-Ordner</h2>
+<p>Der <a href="/uni">Uni-Ordner</a> ist mein privates Verzeichnis gesammelter Lehrmaterialien
+in über 70 Veranstaltungen meines Bachelor- und Masterstudiums Physik an der
+Goethe-Universität Frankfurt sowie dem Bachelorstudium Informatik
+zwischen 2008 und 2013.</p>
+<p>Im Sinne des Open-Access in Wissenschaft und Lehre ist so viel wie möglich frei
+zugänglich. Um die Rechte der Urheber zu wahren, sind nicht eigens erstellte Materialien
+aber nur passwortgeschützt zugänglich. <a href="/uni/abuse.html">Fehlerhafte Freigaben
+ohne Passwort bitte hier melden</a>.</p>
+<p>Der Uni-Ordner umfasst mehr als 10.000&nbsp;PDF-Dateien.
+Das sind über 6GB Daten, das meiste davon gescannt.</p>
+</section>
+</div>
+
+<section id="footer">
+<div class="left"><a href="/uni">UniOrdner <abbr title="Next Generation">NG</abbr></a> von <a href="/">svenk</a></div>
+<nav>
+<a href="/uni/">Semesterübersicht</a> | <a href="/uni/abuse.html">Kontakt</a> | Ansicht: <a href="?view=mobile" title="View in Mobile view">Mobile</a>, <a href="?view=desktop">Classic</a>
+</nav>
+</div>
+
+</div><!-- wrapper -->
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Uni Ordner (SvenK)</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="design/uni-start.js"></script>
+  <link rel="stylesheet" href="design/uni-start.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <meta name="date" content="$Id: index-alt.html 137 2013-11-02 14:51:20Z sven $">
+  <meta name="author" content="Sven Köppel">
+</head>
+<body>
+<div id="wrapper">
+
+<img src="design/folders.jpg" id="folders">
+<ul class="idTabs">
+	<li><a class="selected" href="#start">Inhalt</a></li>
+	<li><a href="#about">Hintergründe</a></li>
+	<li><a href="#mirrors">Mirrors &amp; WebDAV</a></li>
+</ul>
+<div id="content">
+
+<h1 title="Im Uni-Ordner werden alle Studiendateien gesammelt.">Uni-Ordner</h1>
+
+<!-- Erster Tab -->
+<div id="start" class="main-tab tab">
+
+<!--
+  insg.: etwa 9000 Dateien in 2000 Ordnern, ca 3GB (inkl. eBooks, Orga, versteckten Dateien)
+-->
+
+<ul>
+  <li><a href="ws0809">1. Semester (WS 08/09)</a>: 800 Dateien, 350MB, <a href="http://user.uni-frankfurt.de/~s1239595/ws0809.htm">Uni-Portal WS 08/09</a>
+      <br>Mit Ex I, Mathe I, MOD, PRG-1, Theo 1
+  <li><a href="ss2009">2. Semester (SS 2009)</a>: 350 Dateien, 440MB, <a href="http://user.uni-frankfurt.de/~s1239595/ss09.htm">Uni-Portal SS 2009</a>
+      <br>Mit AP2, Ex II, HWR, Mathe II, PRG-2, Theo 2
+  <li><a href="ws0910">3. Semester (WS 09/10)</a>: 600 Dateien<!--5000 mit Eclipse-->, 560MB, <a href="http://user.uni-frankfurt.de/~s1239595/ws0910.htm">Uni-Portal WS 09/10</a>
+      <br>Mit AP1, Elektronik, Ex 3, GL-1, Mathe 3, Numerik, PRG-Praktikum, Theo 3
+  <li><a href="ss2010">4. Semester (SS 2010)</a>: 1400 Dateien, 680MB, <a href="http://user.uni-frankfurt.de/~s1239595/ss10.htm">Uni-Portal SS 2010</a>
+      <br>Mit DS, DM, Ex4a, Ex4b, GL-2, HWR-PR, Theo 4
+      <br>Nicht mehr Elektronik (Digital, Analog, Elektronik-Praktikum)
+  <li><a href="ws1011">5. Semester (WS 10/11)</a>: 1200 Dateien, 660MB, <a href="http://user.uni-frankfurt.de/~s1239595/ws1011.htm">Uni-Portal WS 10/11</a>
+	  <br>Mit F-Praktikum, Ex 5, Theo 5, Kernphysik, Quantenfeldtheorie
+  <li><a href="ss2011">6. Semester (SS 2011)</a>: 890 Dateien, 390MB, <a href="http://user.uni-frankfurt.de/~s1239595/ss2011.htm">Uni-Portal SS 2011</a>
+	  <br>Mit Physik-Bachelorarbeit, QM II, Quantenfeldtheorie II, ART, KI, DBV,
+	  <br>Informatik-Seminaren, Mechanik-Tutorium
+  <li><a href="ws1112">7. Semester (WS 11/12)</a>: 600 Dateien, 160MB, <a href="http://user.uni-frankfurt.de/~s1239595/">Ende des Uni-Portals</a>
+      <br>Mit Physik-Bachelorarbeit, Texttechnologie I
+  <li><a href="ss2012">8. Semester (SS 2012)</a>: 177 Dateien, 100MB
+      <br>Mit <abbr title="Differentialgeometrie">Diffgeo</abbr>, Kernphysik 2, <abbr title="Quanteninformationstheorie">Quanteninfo II</abbr>, Texttechnologie II, <abbr title="Programmierpraktikum der Physik">ProgPrak-Tutorium</abbr>
+  <li><a href="ws1213">9. Semester (WS 12/13)</a>: 5.000 Dateien, 1.000MB <!-- insg 5000 Dateien: davon 460 Files, 550MB FP und 100MB, 4400 Dateien WikiNect -->
+      <br>Mit Laborpraktikum, <abbr title="Hochleistungsrechnerarchitektur">HL</abbr>, <abbr title="Praktikum der experimentellen Hochenergiephysik">HEP-PR</abbr>, Decays in QFT, <abbr title="From QFT to semiclassical Transportgleichungen">QFT to Transportgl</abbr>, Stochastik, WikiNect, <abbr title="Erweiterungen des Standardmodells">Erweiterungen des SM</abbr>, Black Holes, <abbr title="Modellierung und Simulation">MuS 3</abbr>, Data Mining, <abbr title="Hydrodynamik">Hydro</abbr>
+  <li><a href="ss2013">10. Semester (SS 2013)</a>:
+      <br>Mit QFT 2, Black Holes 2, Elektronik, <abbr title="Thermal Quantum field Theory">thQFT</abbr>, Erweiterungen SM 2, Quanteninfo
+  <li><a href="ws1314">11. Semester (WS 13/14)</a>:
+      <br>Mit Masterarbeit, HPC-PR, Logik, TT1
+</ul>
+
+</div>
+<!-- zweiter Tab -->
+<div id="about" class="tab neben-tab">
+<div class="noscript toplink">Hintergründe zum Uni Ordner <a href="#top">&#x2191; Nach oben</a></div>
+
+<h2>Vom USB-Stick zur lebenden Legende - Chronik einer digitalen Nonkonformität</h2>
+<p>Anfang 2010 hab ich mit dem Kauf eines neuen PCs angefangen, alle Materialien
+aller Vorlesungen der vergangenen Semester systematisch zu sammeln, d.h. eigentlich
+nur alle Vorlesungshomepages lokal abzuspeichern und die paar wenigen eigenen
+erstellten Materialien (Praktikumsprotokolle, Scans, Klausurlösungen, etc. die z.T.
+auch per Mail reinkamen) zusammenzustellen. Die dadurch entstehende Datenmenge war
+verblüffend groß: Drei Semester haben 1,4GB Daten in über 6000 Dateien in 2000
+Ordnern erzeugt, der überwiegende Großteil davon PDF-Dateien.</p>
+
+<p>Wenige Monate später hab ich mir einen kleinen Mini-PC als Heimserver angeschafft,
+der dank seiner großen Festplatte unvermittelt auch als NAS seinen Dienst eintrat.
+Der Uni-Ordner zieht um und geht online - 24 Stunden gehostet über einen DSL-Zugang.</p>
+
+<p>Im vierten Semester wurde die Idee vervollständigt, in dem fast alle Mitschriften
+und Übungslösungen eingescannt wurden. Für mich war das eine einfache Möglichkeit,
+in Mails und Chats mit Komilitonen extrem schnell, unkompliziert und passwortlos
+auf Materialien zu verweisen. Der Uni-Ordner war eine rein logische Konsequenz meiner
+dezentralisierten Arbeitsweise (ohne Notebook o.ä.): Ich hab alle Dateien jederzeit
+an jedem Computer mit einem Klick zur Verfügung.</p>
+
+<p>Die Abwesenheit von Passwörtern und Barrieren war dabei stets ein wesentlicher
+Bestandteil. Nur automatisch generierte Verzeichnislistings, kein Schnickschnack.
+Um etwa von der Uni schneller zuzugreifen habe ich bald einen Mirror im Internet
+gestartet, nächtlich automatisiert synchronisiert. Jeder USB-Stick wäre langsamer
+gezückt als der Uni-Ordner auf dem Bildschirm erscheint.</p>
+
+<p>Anfang 2011 wurde mir der Uni-Ordner aber zum Verhängnis: Ich hab es etwas zu
+weit getrieben, auf fragwürdigem Wege generierte Dateien online gestellt. Das
+Ereignis geriet in Vergessenheit und führte zwei Semester später zum
+Kollateralschaden: Plötzlich verfügten hunderte Studenten über Übungslösungen, in
+deren Besitz sie nie hätten kommen dürfen. Die Sache geriet zu Ungunsten meiner
+zu der Zeit geschriebenen Bachelorarbeit zum Politikum, der
+Institutschef ließ eine <a href="ws1112/Abmahnung.pdf">Abmahnung</a> erwirken.
+Der <a href="http://electure.studiumdigitale.uni-frankfurt.de/index.php?cat=.fachbereiche&subcat=12&sem=ws1112&entry=7&vl_id=8y7mZww53r">Theo5-Vorlesung</a>
+<a href="http://electure-ms.studiumdigitale.uni-frankfurt.de/vod/clips/Vf4TWQkrJw/flash.html">vom 22.12.2011</a>
+(Zeit 06:35) kann man exemplarisch entnehmen, wie aufgeregt das Institut tatsächlich
+war:</p>
+
+<blockquote>
+[...] Sie haben sich vielleicht gewundert, warum das Script noch nicht geupdatet
+wurde auf dem Server. Das wollte ich gestern abend machen - aber das ging nicht
+- irgendwie funktionierte mein Remote Login nicht.
+Und das wiederum hat den Grund, dass <b>irgendeiner - von den superschlauen - Studenten - 
+irgendwie unsere Accounts gehackt hatte</b>, und nicht nur meinen, sondern auch den
+von Kollege Philipsen - und irgendwelche Lösungen, die er irgendwo gefunden hatte,
+von irgendwelchen Aufgaben, die er - <b>also ich meine das ist alles strafbar, ja,
+da sind wir uns mal im Klaren drüber - die hat er dann also auf seiner Homepage,
+zur allgemeinen Verwendung, abgelegt -  ganz toller Hecht, wahrscheinlich
+hat er sich viele Sympathiepunkte bei Ihnen eingeholt aber bei uns eben nicht -
+und deswegen haben wir jetzt komplett alle Accounts gesperrt, kommt keiner mehr
+ran</b>. Dummerweise komme ich auch nicht mehr an meinen von außerhalb, deswegen
+konnte ich Ihnen das [Script] nicht aufladen [...]
+</blockquote>
+
+<p>Natürlich wurde das geklaute Material gelöscht und der Uni-Ordner ging bis
+auf weiteres offline. Der Uni-Ordner demaskierte eine Diskrepanz in der Physik-Lehre
+zwischen einem rosaroten Idealstudenten und der gängigen Praxis, Tonnen von
+Materialien in einer regelrechten studentischen Schattenwirtschaft untereinander
+auszutauschen. Schummelt sich da eine Generation von Opportunisten durchs
+Studium? Der schwarze Peter auf Seiten der Talare ist völlig opak. §8 der
+<a href="ordnungen/Bachelor-Ordnung%20Physik.pdf">Bachelorordnung Physik 2008</a>
+besagt</p>
+
+<blockquote>
+Zu den Vorlesungsübungen <b>müssen Musterlösungen in schriftlicher
+Form zeitnah bereitgestellt werden</b>.
+</blockquote>
+
+<p>Selbstverständlich rechtfertigt die Missachtung der Ordnung keinen Diebstahl,
+doch der recht einseitige Umgang mit dem Vorfall lässt sich nicht von der Hand
+weisen.</p>
+
+<p>In Zeiten von digitalen Lehrinhalten und dem technischen Unvermögen, infolge
+der physikalischen Gesetzmäßigkeiten heutiger Rechenmaschinen, das Kopieren 
+digital vorliegender Informationen zu verhindern, müssen sowohl Lehrende als auch
+Lernende ihr Verhalten anpassen. Kein Urheberrechtsgesetz der Welt kann verhindern,
+dass über das Internet verbreitetes Lehrmittel seine Geltungszeit überdauern wird.
+Während Film- und Musikproduzenten einen Kampf gegen Windmühlen führen, ist das
+Problem in der Hochschullehre meines Erachtens gar nicht gegeben: Genauso wie
+Hörsäle der Öffentlichkeit ohne Hindernisse zugänglich sind, sollte eLearning
+frei von künstlichen Barrikaden sein. Das hat nichts mit Urheberrecht zu tun,
+sondern einzig mit der Verbreitung von Inhalten.</p>
+
+<p>Besonders in höheren Semestern, mit zunehmender Spezialisierung, wird das
+Spektrum an Übungsaufgaben immer schmaler. Um sich nicht jedes Semester zeitaufwändig
+neue Aufgaben ausdenken zu müssen, ist es gängige Praxis, anzunehmen, dass
+Studentenjahrgänge nicht untereinander kommunizieren. Der Uni-Ordner führte
+diesen Lehransatz öffentlich ad Absurdum. Ein ehrlicher Umgang mit dem Problem
+der beschränkten Aufgaben wäre der Appell an die Lernenden, eben ihr Verhalten
+an die heutige Situation mit digitalen Lehrinhalten anzupassen. Und das bedeutet
+im einfachsten Fall: Alle Übungsaufgaben sind mit allen Musterlösungen jederzeit
+zugänglich. Es obliegt dem Studenten, ungeeignete Prüfungskriterien nicht durch
+Erschleichung zu vollbringen, sondern Physik aus Interesse am Fach selbst zu
+studieren, was im Zweifelsfall bedeutet, Übungslösungen nur zur Kontrolle oder
+für den Lernprozess selber zu verwenden. <b>Nur diese Form des
+eigenverantwortlichen Lernens ist realistisch</b>.
+Alles andere ist Gängelung von Studenten und Augenverschließen vor der Wirklichkeit.
+</p>
+
+<p>Doch es sind gar nicht die offiziellen Lehrmaterialien vergangener Semester,
+die den überwiegenden Großteil des Uni-Ordners ausmachten, sondern die mit
+eigener Hand angefertigten Mitschriften, Protokolle, Übungen. Ich sah es nicht
+ein, mein eigen Fleiß und Blut offline zu nehmen.</p>
+
+<p>Im Februar 2012 hab ich also ein filigranes Rechtesystem (technisch als
+Webserver-Erweiterung mit <tt>mod_perl</tt>) entwickelt, welches auf Dateiniveau
+freie, selbsterstellte Lernmaterialien passwortlos zugänglich macht, während
+es urheberrechtlich geschützte Materialien mit dem Recht auf eine private
+Kopie einer beschränkten Lerngruppe nur mit Benutzer/Passwort-Kombination
+Zugriff genehmigt. Damit wurde eine kollaborativere Arbeitsplattform erzeugt,
+auf der eine kleine Lerngruppe Inhalte beiträgt und dadurch Zugriff erhält.</p>
+
+<p>Heute (Ende 2012) umfasst das Archiv mehr als 10.000 Dateien<!-- in 3000 Ordnern -->,
+über 6GB an Umfang, was im Schnitt 600kB/Dokument (typischerweise ein PDF
+à 4 Seiten) darstellt, kumuliert also etwa 40.000 DIN A4-Seiten Gesamtumfang.</p>
+
+<!--
+<div style="width:48%; float:left; padding-top: 3px;">
+<h2>Was?</h2>
+<p>Anfang 2010 hab ich mit dem Kauf eines neuen PCs angefangen, alle Materialien
+aller Vorlesungen der vergangenen Semester systematisch zu sammeln, d.h. eigentlich
+nur alle Vorlesungshomepages lokal abzuspeichern und die paar wenigen eigenen
+erstellten Materialien (Praktikumsprotokolle, Scans, nicht-offizielle Materialien
+wie Klausurlösungen, etc., die per Mail reinkamen) zusammenzustellen. Die dadurch
+entstehende Datenmenge war verblüffend groß: Drei Semester haben 1,4GB Daten in
+über 6000 Dateien in 2000 Ordnern erzeugt, der überwiegende Großteil davon
+PDF-Dateien.</p>
+
+<p>Mit <a href="/">Sylvester</a> hab ich dann einen Mini-PC angeschafft, der
+eigentlich für <a href="/m66/silvester.html">Proxying, Monitoring, etc.</a>
+genutzt werden sollte. Naja - große Festplatte (640GB), also auch
+<a href="http://de.wikipedia.org/wiki/Network_Attached_Storage">NAS</a>.
+Nun befindet sich der Uni-Ordner auf diesem Computer.</p>
+
+<p>Im vierten Semester wurde die Idee dann vervollständigt, in dem fast alle
+Mitschriften und Zettel eingescannt wurden.</p>
+
+</div>
+<div style="margin-left:52%; padding-top: 3px;">
+
+<h2>Beweggründe, Rechtliches</h2>
+<p>Die meisten Studenten werden wohl soetwas wie einen Ordner ihrer Uni-Sachen
+haben. Ich bin den Schritt weitergegangen, diesen zu veröffentlichen - es ist nur
+eine logische Konsequenz meiner dezentralisierten Arbeitsweise: Damit hab ich
+alle Daten jederzeit an jedem Ort der Welt zur Verfügung und kann im Internet
+und Mails extrem schnell, unkompliziert und passwortlos auf Materialien verweisen.</p>
+
+<p>Die Abwesenheit von Passwörtern und Barrieren ist dabei ein wesentlicher
+Bestandteil. Viele Materialien sind jedoch von ihren Urhebern passwortgeschützt
+veröffentlicht, als traurige Konsequenz einer schwammigen Urheberrechtsklärung in
+der deutschen Bildung. Grundsätzlich gilt: Die Rechte an den Dateien verbleiben
+bei ihren Autoren. Dieser Ordner wird <a href="/robots.txt">nicht durch Suchmaschinen
+erfasst</a>. Im Grunde genommen liegt daher gar keine ernsthafte Veröffentlichung
+vor, da der Bekanntheitsgrad dieser Seite tendiert selbst semesterweit gegen Null,
+es existieren praktisch keine Links auf diese Seiten. Zugriffe werden
+<a href="http://svenk.homeip.net/webalizer">statistisch ausgewertet</a> und auf
+Anormalitäten überprüft.</p>
+
+<p>Selbsterstellte Dateien (Protokolle, Übungszettel, Mitschriften) sind in der
+Regel <a href="http://de.wikipedia.org/wiki/Gemeinfreiheit">Public Domain</a>,
+können also beliebig ohne Urhebernennung verwendet werden. Im Einzelfall aber
+lieber noch mal <a href="http://purl.org/svenk/contact" title="Kontakt">nachfragen</a>.
+</p>
+
+</div>
+-->
+
+</div><!--#was-->
+<!-- Dritter Tab -->
+<div id="mirrors" class="tab neben-tab">
+<div class="noscript toplink">Mirrors zum Uni-Ordner <a href="#top">&#x2191; Nach oben</a></div>
+
+<p>Das Original des Uni-Ordners wird auf einem <a href="http://svenk.homeip.net">Heimserver</a>
+gespeichert. Um die Verbindung zu entlasten, wurde ein
+<a href="http://de.wikipedia.org/wiki/Mirror">Mirror</a> (Spiegelserver) aufgesetzt.</p>
+
+<div style="text-align:center; margin: 2.5em;">
+
+<table style="display: inline-block;padding-right: 1em;">
+<caption>Original (0,5Mbit)</caption>
+<tr><th>Protokoll</th><th>Adresse</th></tr>
+<tr><td><a href="http://www.ietf.org/rfc/rfc2616.txt" title="Per Browser">HTTP</a></td>
+    <td><a href="http://svenk.dyndns.org/uni">http://svenk.dyndns.org/uni</a></td>
+<!--<tr><td><a href="http://rsync.samba.org/" title="Dateien spiegeln">RSYNC</a></td>
+    <td>rsync://svenk.homeip.net/uni</td>-->
+<tr><td><a href="http://www.ietf.org/rfc/rfc2818.txt" title="Verschlüsselt">HTTPS</a></td>
+    <td><a href="https://svenk.dyndns.org/uni">https://svenk.dyndns.org/uni</a></td>
+</table>
+
+<table style="display: inline-block;">
+<caption>Mirrors (100Mbit)</caption>
+<tr><th>Protokoll<th>Adresse
+<tr><td>HTTP
+    <td><a href="http://sven.xn--kppel-jua.org/uni">http://sven.köppel.org/uni</a>
+<tr><td><a href="http://tools.ietf.org/html/rfc2518" title="Als Laufwerk einhängen">WebDAV</a>
+    <td><a href="http://sven.xn--kppel-jua.org/uni">http://sven.köppel.org/uni</a>
+</table>
+
+</div>
+
+<h2>Warum den Mirror benutzen?</h2>
+<p>Auf dem Spiegelserver kann man <i>200 mal schneller</i> die gewünschten Daten runterladen.
+Nutzt diese Möglichkeit! Jeder, der über meinen DSL-Zugang Dateien runterlädt, blockiert ihn
+quasi instantan. Sollte mich das in meinem Arbeitsfluss behindern, seh ich mich gezwungen
+den lokalen Service abzuschalten.</p>
+
+<p>Aktuell (Apri 2012): Ich leite alle alten Semester automatisch auf meinen Mirror weiter,
+weil sich dort sowieso nichts mehr ändert.</p>
+
+<!--
+<h2>Aus aktuellem Grund: Hinweis für Datensammler</h2>
+<p>Wer vorhat, große Datenbestände (oder alles...) zu kopieren, ist herzlich eingeladen -
+denn dafür sind die Sachen ja auch online. Allerdings hoste ich es derzeit aus
+Bequemlichkeit direkt von
+einem Computer aus meinem Heimnetz, das "nur" mit DSL angebunden ist. Deshalb ist die
+Downloadgeschwindigkeit für Besucher auch so niedrig! Große Downloads sorgen aber dafür,
+dass die Leitung dicht ist - und hier zuhause niemand mehr in respektabler Zeit surfen kann ;-)
+<br>Daher - und auch in eigenem Interesse, um deutlich höhere Geschwindigkeiten zu
+genießen - benutzt für größere Downloadaktionen wenn immer möglich einen Mirror.
+Sie sollen demnächst automatisch nächtlich auf den aktuellen Stand gebracht werden.</p>
+
+<p>-Sven, Montag den 15.11.2010</p>
+
+<p>PS: Anlass: Ich musste den WebDAV-Zugriff leider wieder abschalten, weil jemand darüber
+"mal eben alles" runterladen wollte. In Wiederholungsfällen werd ich zukünftig leider mit
+dynamischer Bandbreitenbeschränkung arbeiten müssen (Mirrors natürlich unbetroffen).</p>
+-->
+
+<h2>Ganze Ordner runterladen oder spiegeln</h2>
+<p>Um etwa ganze Ordnerstrukturen runterzuladen, bequemer zu navigieren oder
+einfach die Inhalte selbst zu "besitzen", steht WebDAV (nur Lesezugriff)
+zur Verfügung.
+<a href="http://svenk.dyndns.org/wiki/webdav">Wie krieg ich WebDAV-Zugriff für mein System?</a>
+</p>
+
+<a href="/wiki/webdav" style="text-align:center;display:block;padding:10px;" title="WebDAV einrichten">
+  <img src="http://svenk.dyndns.org/wiki/_media/webdav_unter_windows_xp.png?w=220">
+  <img src="http://svenk.dyndns.org/wiki/_media/webdav-einrichtung_unter_windows_7.png?w=178">
+  <img src="http://svenk.dyndns.org/wiki/_media/gnome_webdav.png?w=267">
+</a>
+
+<!--<p>Der rsync-Zugang zum Spiegeln wurde bis auf weiteres deaktiviert, da sich die
+dateibasierte Zugriffsrechtregelung darauf nicht anwenden lässt.</p>-->
+
+<h2>Informationen über diese Installation</h2>
+<pre class="mirrorinfo">
+<a href="mirror.txt">Informationen über diese Installation</a>
+</pre>
+
+<!--
+<h2>Zukünftiges</h2>
+<p>Das volle Potential von Kollaboration würde man erreichen, wenn man dann ein
+zentrales Repositorium erschaffen würde, in das Komilitonen gleichermaßen Inhalte
+beitragen können. Bis dahin wird es wohl noch etwas dauern... - außer jemand
+hilft mit (<a href="http://purl.org/svenk/contact">Kontakt</a>).</p>
+-->
+
+</div>
+<!-- Ende letzter Tab -->
+
+<!--<img src="design/books-left.jpg" id="books-left">-->
+<a href="library" title="Zur den eBooks im Uni-Ordner gehen"><img src="design/books-right.jpg" id="books-right" alt="Einige Bücher vom vierten Semester - auf zur Bibliothek"></a>
+
+</div><!--content-->
+</div><!--wrapper-->
+<div id="footer">
+	<a href="http://dev.technikum29.de/svn/filedetails.php?repname=private-websites&path=%2Funi-ordner%2Findex.html" title="Im WebSVN anschauen">$Id: index-alt.html 137 2013-11-02 14:51:20Z sven $</a>
+	<div class="mirrorinfo"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Just to find out if shell scripts and cgi-bin is working the way
+# we need it here.
+
+echo "Content-Type: text/plain; charset=utf-8"
+echo "Server: bibtex-uniordner/bash on Apache/ITP"
+echo
+echo "Hello World, this is $(whoami) on $(hostname)"
+

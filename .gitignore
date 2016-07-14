@@ -1,0 +1,18 @@
+
+
+# this used to be managed by svn in earlier days
+.svn
+
+# no log files and no backup files
+*.log
+*.log2
+*~
+
+# the search engine locatedb blob
+*.db
+
+# python compilates etc.
+*.pyc
+
+# the typical location of the files which are softlinked
+mirror

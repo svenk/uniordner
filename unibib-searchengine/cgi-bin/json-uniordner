@@ -1,0 +1,32 @@
+#!/usr/bin/python
+# Python2
+#
+# Again, this is the equivalent of cgi-bin/bibtex-uniordner.
+#
+# (CC0) 2015 SvenK
+
+searchengine_dir = "/home/sven/sko/UniOrdner/System/unibib-searchengine"
+
+import os
+import sys
+os.chdir(searchengine_dir)
+sys.path.append(searchengine_dir)
+
+from collect2json import collect2json
+
+import cgi
+
+# debugging
+import cgitb
+cgitb.enable()
+
+print "Content-Type: text/plain; charset=utf-8"
+print "Server: bibtex to json by python, on Apache/uniordner/svenk"
+print
+
+form = cgi.FieldStorage()
+
+if form.getfirst("rescan"):
+	os.system("./update-locatedb.sh 2>&1")
+
+collect2json()

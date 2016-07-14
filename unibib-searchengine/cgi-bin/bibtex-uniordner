@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# This is a bash CGI script as a wrapper for the
+# UniOrdner bibtex extractor (using the linux "locate" search engine).
+#
+# The output of this cgi-script is in a way that it can be easily parsed,
+# eg. by an AJAX calling javascript. Lines starting with "#*" are basically
+# comment output while all other lines alltogether represent a valid bibtex file.
+#
+# (CC0) 2015 SvenK
+#
+
+echo "Content-Type: text/plain; charset=utf-8"
+echo "Server: bibtex-uniordner/bash on Apache/uniordner/svenk"
+echo
+echo
+echo "#* This is the bibtex-uniordner CGI script running at $(hostname)"
+echo
+
+# parse query string (into associative array, bash4)
+declare -A GET
+saveIFS=$IFS
+IFS='=&'
+get_stripped=($QUERY_STRING)
+IFS=$saveIFS
+for ((i=0; i<${#get_stripped[@]}; i+=2))
+do GET[${get_stripped[i]}]=${get_stripped[i+1]}; done
+
+cd .. # tools in parent directory
+#PATH=~/bin:"${PATH}" # use this if you have paralle, bibtex, etc. on your own path
+SHELL=/bin/bash
+HOME=/home/sven
+export PATH
+export SHELL
+export HOME
+
+if [[ ${GET['rescan']} ]]; then
+	echo "#* Invoking bibtex rescanning";
+	./update-locatedb.sh 2>&1 || { echo '#* Invoking update-locatedb failed!'; exit 0; }
+else
+	echo "#* Skipping reindexing bibtex files (use ?rescan=true to force)"
+fi
+
+echo '#* Invoking parallel bibcollect'
+echo
+./bibcollect.sh 2>&1 || { echo '#* Invoking bibcollect failed!'; exit 0; }
+
+echo '#* End of BibTex file.'
+exit 0

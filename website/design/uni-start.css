@@ -1,0 +1,137 @@
+body {
+	background-color: #ddd;
+	font: 100%/130% Georgia;
+	padding: 0;
+	margin: 0;
+}
+
+img {
+	border: none;
+}
+
+#wrapper {
+	width: 800px; /* IE */
+	max-width: 800px;
+	margin: 0 auto;
+	background-color: #eee;
+}
+
+html>body #wrapper { width: auto; }
+
+#folders {
+	width: 100%;
+}
+
+#content {
+	background-color: white;
+	padding: 2em;
+	position: relative;
+	padding-bottom: 310px;
+	overflow: hidden;
+	clear: both;
+}
+
+#footer {
+	margin: 5px 0 2em 0;
+	text-align: center;
+}
+
+#footer, #footer a { color: #888; }
+
+.neben-tab {
+	margin-top: 2em;
+	border-top: 5px solid #ddd; /* noscript */
+	padding-top: 1em;
+}
+
+body.dynamic .neben-tab { border: none; padding-top: 0; }
+body.dynamic .noscript  { display: none; }
+
+.toplink { text-align: right; }
+
+.neben-tab:after { /* clear after */
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
+.idTabs {
+	list-style: none;
+	margin: 0; padding: 0;
+	text-align: center;
+	border-bottom: 1px solid #DEDEDE;
+}
+
+.idTabs li {
+	display: inline;
+	margin: 0; padding: 0;
+}
+
+.idTabs a {
+	display: inline-block;
+	
+	text-decoration: none;
+	padding: 6px 10px;
+	margin: 6px 1px -1px 0;
+	background-color: #dedede;
+	color: #222;
+}
+
+.idTabs a.selected {
+	background-color: white;
+	border-bottom: 1px solid white;
+	border-right: 1px solid #ddd;
+	margin-right: 0;
+	cursor: default;
+	color: #000;
+}
+
+.idTabs a:hover, .idTabs a:focus, .idTabs a:active {
+	outline: none;
+}
+
+#books-right {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.main-tab li {
+	margin-bottom: 1.3em;
+}
+
+p {
+	text-align: justify;
+}
+
+h1 {
+	text-align: center;
+	margin: 1.6em;
+	font-size: 200%;
+	padding: 0;
+}
+
+h2 {
+	font-size: 130%;
+	padding: 0;
+	margin: .3em 0;
+	margin-top: 1.5em;
+}
+
+a:hover {
+	background-color: yellow;
+}
+
+pre {
+	padding: 1.2em;
+	background-color: #eee;
+}
+
+table { border: 0 none; }
+caption { font-weight: bold; margin-bottom: 3px; }
+th, td { padding: 3px; text-align: center; }
+th { background-color: #eee; }
+td {	border-bottom: 1px dotted #BBBBDD; }
