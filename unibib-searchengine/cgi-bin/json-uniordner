@@ -5,12 +5,10 @@
 #
 # (CC0) 2015 SvenK
 
-searchengine_dir = "/home/sven/sko/UniOrdner/System/unibib-searchengine"
-
 import os
 import sys
-os.chdir(searchengine_dir)
-sys.path.append(searchengine_dir)
+os.chdir('../')
+sys.path.append(os.path.realpath('.'))
 
 from collect2json import collect2json
 

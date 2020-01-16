@@ -28,7 +28,7 @@ sub handler {
 	my $perm = UniOrdner::PermissionFile->quick_check_permission($r->filename, $r->dir_config->get('uniroot'));
 	DEBUG("Permission = ".UniOrdner::PermissionFile->printable_access($perm));
 	
-	if( ($r->args eq 'force-login' && $perm != UniOrdner::PermissionFile::ACCESS_FORBIDDEN)
+	if( (defined $r->args && $r->args eq 'force-login' && $perm != UniOrdner::PermissionFile::ACCESS_FORBIDDEN)
 	    || $perm == UniOrdner::PermissionFile::ACCESS_PASSWORD) {
 		$r->add_config(['require valid-user']);
 	} elsif($perm == UniOrdner::PermissionFile::ACCESS_OK) {

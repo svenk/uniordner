@@ -9,4 +9,4 @@
 
 set -e
 cd $(dirname $0)
-updatedb -l 0 -o locate.db -U ../..
+updatedb -l 0 -o locate.db -U ~/sko/UniOrdner/

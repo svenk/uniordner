@@ -26,6 +26,7 @@ use Apache2::URI;
 use Apache2::RequestIO;
 use APR::Table; # headers tables
 use POSIX qw(strftime);
+use File::Basename; # dirname, 2017-11-03
 
 sub handler {
 	# according to Apache2::AutoIndex::XSLT and Apache::AutoIndex
@@ -173,7 +174,8 @@ sub collect_global_data {
 	# check whats about the permission files. Do we have some?
 	# (Stored in $data just for fast copy to $info in code)
 	$data->{'has_permfile'} = UniOrdner::PermissionFile->has_permission_file($r->filename);
-	$data->{'parent_has_permfile'} = UniOrdner::PermissionFile->has_permission_file(updir($r->filename));
+	# $data->{'parent_has_permfile'} = UniOrdner::PermissionFile->has_permission_file(updir($r->filename)); # fix 2017-11-03
+	$data->{'parent_has_permfile'} = UniOrdner::PermissionFile->has_permission_file(dirname($r->filename));
 
 	# common path debugging stuff
 	my $path_info = $data->{'paths'} = {};
